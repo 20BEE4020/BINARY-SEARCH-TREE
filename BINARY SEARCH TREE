@@ -1,0 +1,56 @@
+class Node {
+    int data;
+    Node left, right;
+    Node(int d) { // 50
+        data = d; // 50
+        left = right = null;
+    }
+}
+class BST {
+    Node root; // declare
+    BST () {
+        root = null; // initialization
+    }
+    
+    public void insert(int data) { // 55
+        root = insertrec(root, data); // 50, 55
+    }
+    private Node insertrec(Node temp, int data) { // 50, 55
+        if(temp==null) {
+            temp = new Node(data); // 
+            return temp;
+        }
+        if(data < temp.data) { // 45 < 50
+             temp.left = insertrec(temp.left, data); // null, 45
+        }
+        else if(data>temp.data){ // 55 > 50
+            temp.right=insertrec(temp.right,data);
+        }
+        return temp;
+    }
+    public void inorderTraversal() { // LEFT ROOT RIGHT
+        inorderrec(root); // 50
+    }
+    private void inorderrec(Node temp) { // 50
+        if(temp != null) {
+            inorderrec(temp.left);
+            System.out.print(temp.data+" ");
+            inorderrec(temp.right);
+        }
+    }
+}
+class Main {
+    public static void main(String[] args) {
+        BST tree = new BST(); // constructor
+        tree.insert(50);
+        tree.insert(45);
+        tree.insert(55);
+        tree.insert(35);
+        tree.insert(60);
+        tree.insert(53);
+        tree.insert(47);
+        
+        System.out.println("Inorder Traversal: ");
+        tree.inorderTraversal();
+    }
+}
